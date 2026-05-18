@@ -1,0 +1,12 @@
+{% load i18n %}
+{% if elections %}
+    <ul>
+        {% for election in elections %}
+            <li>
+                <a href="{{ election.get_absolute_url }}">{{ election.date|date:"SHORT_DATE_FORMAT" }} {{ election.name }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>{% translate "No upcoming elections." %}</p>
+{% endif %}

@@ -1,0 +1,47 @@
+{% extends "froide_election/base.html" %}
+{% load i18n %}
+{% load election_tags %}
+{% load cms_tags %}
+{% block title %}
+    {{ election.name }}
+{% endblock title %}
+{% block meta %}
+    {% include "snippets/meta.html" %}
+{% endblock meta %}
+{% block app_body %}
+    <div class="container my-3">
+        <small>
+            {% for ref in reference_regions %}
+                <a href="{{ ref|region_url }}">{{ ref.name }}</a>
+                {% if not forloop.last %},{% endif %}
+            {% endfor %}
+        </small>
+        <h1 class="mt-0">{{ region.name }}</h1>
+        <ul>
+            {% for election in elections %}<li>{{ election.name }}</li>{% endfor %}
+        </ul>
+        <p>
+            <a href="{{ publicbody.get_absolute_url }}">{{ publicbody.name }}</a>
+        </p>
+        {% if email %}
+            <p>{{ email }}</p>
+            <form action="mailto:{{ email }}" method="post">
+                {% blocktranslate with election=elections.0.name asvar subject trimmed %}
+                    Postal vote material for {{ election }}
+                {% endblocktranslate %}
+                {% blocktranslate with election=elections.0.name asvar body trimmed %}
+                    To whom it may concern,
+                    I am writing to request postal vote material for the upcoming election {{ election }}. I am a resident of {{ region.name }} and would like to exercise my right to vote by mail.
+                    Name: [Your Name]
+                    Address: [Your Address]
+                    Date of Birth: [Your Date of Birth]
+                    Thank you for your assistance.
+                    Kind regards,
+                {% endblocktranslate %}
+                <input type="hidden" name="subject" value="{{ subject }}">
+                <input type="hidden" name="body" value="{{ body }}">
+                <button type="submit" class="btn btn-primary">{% translate "Send email" %}</button>
+            </form>
+        {% endif %}
+    </div>
+{% endblock app_body %}

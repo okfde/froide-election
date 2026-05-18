@@ -1,0 +1,20 @@
+{% load i18n %}
+{% load election_tags %}
+<div id="election-{{ election.id }}-regions">
+    <div class="table-responsive">
+        <table class="table">
+            {% for region in regions %}
+                <tr>
+                    <td>
+                        <a href="{{ region|region_url }}">{{ region.name }}</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+    {% if paginator.num_pages > 1 %}
+        <div hx-boost="true" hx-target="#election-{{ election.id }}-regions">
+            {% include "pagination/pagination.html" with page_obj=page_obj %}
+        </div>
+    {% endif %}
+</div>

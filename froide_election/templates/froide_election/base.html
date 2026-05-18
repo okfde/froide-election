@@ -1,0 +1,41 @@
+{% extends CMS_TEMPLATE %}
+{% load i18n %}
+{% load cms_tags %}
+{% load static %}
+{% load djangocms_alias_tags %}
+{% block body %}
+    <nav class="container" aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                {% page_url "home" as home_url %}
+                <a href="{{ home_url|default:"/" }}">
+                    <i class="fa fa-home"></i>
+                    <span class="visually-hidden">{% trans "Home Page" %}</span>
+                </a>
+            </li>
+            <li class="breadcrumb-item">
+                {% page_url "election" as election_url %}
+                <a href="{{ election_url }}">{% translate "Elections" %}</a>
+            </li>
+            {% if election %}
+                <li class="breadcrumb-item">
+                    <a href="{{ election.get_absolute_url }}" title="{{ election.name }}">{{ election.name }}</a>
+                </li>
+            {% endif %}
+            {% if region %}
+                <li class="breadcrumb-item active">
+                    <span>{{ region.name }}</span>
+                </li>
+            {% endif %}
+        </ol>
+    </nav>
+    {% static_alias "election_header" %}
+    {% block app_body %}
+        {% placeholder "content" %}
+    {% endblock app_body %}
+    {% static_alias "election_footer" %}
+{% endblock body %}
+{% block scripts %}
+    {{ block.super }}
+    <script type="text/javascript" src="{% static 'election/js/htmx.min.js' %}"></script>
+{% endblock scripts %}

@@ -1,0 +1,4 @@
+include README.md LICENSE
+recursive-include froide_election/templates *
+recursive-include froide_election/static *
+recursive-include froide_election/locale *.po

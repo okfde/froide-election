@@ -1,0 +1,8 @@
+*.pyc
+*.mo
+*.egg-info/
+__pycache__
+.vscode/
+.venv/
+postgres_data/
+.ruff_cache/

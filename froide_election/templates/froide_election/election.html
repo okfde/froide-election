@@ -1,0 +1,34 @@
+{% extends "froide_election/base.html" %}
+{% load i18n %}
+{% load cms_tags %}
+{% block title %}
+    {{ election.name }}
+{% endblock title %}
+{% block meta %}
+    {% include "snippets/meta.html" %}
+{% endblock meta %}
+{% block app_body %}
+    <div class="container my-3">
+        <h1>{{ election.name }}</h1>
+        <form method="get"
+              action="."
+              hx-boost="true"
+              hx-target="#election-{{ election.id }}-regions"
+              hx-swap="show:none"
+              hx-trigger="input changed delay:350ms, keyup[key=='Enter'], load">
+            <div class="input-group">
+                {% blocktranslate with kind=election.get_sub_region_kind_display asvar search_region %}Search {{ kind }}{% endblocktranslate %}
+                <input type="text"
+                       name="q"
+                       value="{{ query }}"
+                       autocomplete="off"
+                       class="form-control"
+                       placeholder="{{ search_region }}"
+                       aria-label="{{ search_region }}"
+                       aria-describedby="region-search">
+                <button class="btn btn-outline-secondary" type="button" id="region-search">{% translate "Search" %}</button>
+            </div>
+        </form>
+        {% include "froide_election/includes/_regions.html" %}
+    </div>
+{% endblock app_body %}
