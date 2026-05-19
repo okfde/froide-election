@@ -1,6 +1,7 @@
 from functools import cache
 
 from django.core.paginator import Paginator
+from django.http import Http404
 from django.shortcuts import get_object_or_404, redirect, render
 
 from froide.georegion.models import GeoRegion
@@ -50,7 +51,13 @@ def get_postal_vote_category():
 
 
 def show_region(request, region_identifier, region_slug):
-    region = get_object_or_404(GeoRegion, region_identifier=region_identifier)
+    region = (
+        GeoRegion.objects.filter(region_identifier=region_identifier)
+        .order_by("level")
+        .first()
+    )
+    if region is None:
+        raise Http404
     if region.slug != region_slug:
         return redirect(region_url(region))
 
