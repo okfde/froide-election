@@ -19,6 +19,8 @@ class UpcomingElectionsToggle(CMSPluginBase):
         context = super().render(context, instance, placeholder)
         now = timezone.now()
         too_far = now + timedelta(days=240)
-        elections = Election.objects.filter(date__gte=now, date__lte=too_far)
+        elections = Election.objects.filter(date__gte=now, date__lte=too_far).order_by(
+            "date"
+        )
         context["elections"] = elections
         return context
