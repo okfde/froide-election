@@ -10,6 +10,7 @@
 {% block app_body %}
     <div class="container my-3">
         <h1>{{ election.name }}</h1>
+        <p>{{ election.short_description }}</p>
         <form method="get"
               action="."
               hx-boost="true"
