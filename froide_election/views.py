@@ -1,3 +1,4 @@
+import re
 from functools import cache
 
 from django.core.paginator import Paginator
@@ -13,6 +14,8 @@ from .utils import get_publicbody_for_region
 
 REGIONS_PER_PAGE = 20
 
+DIGIT_RE = re.compile(r"^\d+$")
+
 
 def show_election(request, election_slug):
     election = get_object_or_404(
@@ -22,7 +25,12 @@ def show_election(request, election_slug):
 
     query = request.GET.get("q", "")
     if query:
-        qs = qs.filter(name__icontains=query)
+        if DIGIT_RE.match(query):
+            qs = qs.filter(
+                related__region_identifier__startswith=query, related__kind="zipcode"
+            )
+        else:
+            qs = qs.filter(name__icontains=query)
 
     paginator = Paginator(qs, REGIONS_PER_PAGE)
     page_number = request.GET.get("page", "")

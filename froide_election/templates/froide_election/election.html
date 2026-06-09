@@ -18,7 +18,7 @@
               hx-swap="show:none"
               hx-trigger="input changed delay:350ms, keyup[key=='Enter'], load">
             <div class="input-group">
-                {% blocktranslate with kind=election.get_sub_region_kind_display asvar search_region %}Search {{ kind }}{% endblocktranslate %}
+                {% blocktranslate with kind=election.get_sub_region_kind_display asvar search_region %}Search {{ kind }} or postcode{% endblocktranslate %}
                 <input type="text"
                        name="q"
                        value="{{ query }}"
