@@ -7,6 +7,11 @@
                 <tr>
                     <td>
                         <a href="{{ region|region_url }}">{{ region.name }}</a>
+                        {% if postcodes %}
+                            <small>
+                                {% for postcode in region.related.all %}<span class="badge text-bg-light">{{ postcode.name }}</span>{% endfor %}
+                            </small>
+                        {% endif %}
                     </td>
                 </tr>
             {% endfor %}

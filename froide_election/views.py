@@ -2,6 +2,7 @@ import re
 from functools import cache
 
 from django.core.paginator import Paginator
+from django.db.models import Prefetch
 from django.http import Http404
 from django.shortcuts import get_object_or_404, redirect, render
 
@@ -19,15 +20,22 @@ DIGIT_RE = re.compile(r"^\d+$")
 
 def show_election(request, election_slug):
     election = get_object_or_404(
-        Election.objects.select_related("region"), slug=election_slug
+        Election.objects.prefetch_related("region"), slug=election_slug
     )
     qs = election.get_regions().order_by("name")
 
     query = request.GET.get("q", "")
+    postcodes = None
     if query:
         if DIGIT_RE.match(query):
-            qs = qs.filter(
-                related__region_identifier__startswith=query, related__kind="zipcode"
+            postcodes = GeoRegion.objects.filter(
+                region_identifier__startswith=query, kind="zipcode"
+            )
+        if postcodes:
+            qs = (
+                qs.filter(related__in=postcodes)
+                .distinct()
+                .prefetch_related(Prefetch("related", queryset=postcodes))
             )
         else:
             qs = qs.filter(name__icontains=query)
@@ -44,6 +52,7 @@ def show_election(request, election_slug):
         request,
         template_name,
         {
+            "postcodes": postcodes,
             "election": election,
             "paginator": paginator,
             "page_obj": page_obj,
