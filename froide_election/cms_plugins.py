@@ -1,5 +1,6 @@
 from datetime import timedelta
 
+from django.urls import reverse
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 
@@ -10,7 +11,7 @@ from .models import Election
 
 
 @plugin_pool.register_plugin
-class UpcomingElectionsToggle(CMSPluginBase):
+class UpcomingElectionsPlugin(CMSPluginBase):
     module = _("Elections")
     name = _("Upcoming elections")
     render_template = "froide_election/plugins/upcoming_elections.html"
@@ -23,4 +24,16 @@ class UpcomingElectionsToggle(CMSPluginBase):
             "date"
         )
         context["elections"] = elections
+        return context
+
+
+@plugin_pool.register_plugin
+class ElectionRegionSearchPlugin(CMSPluginBase):
+    module = _("Elections")
+    name = _("Election region search")
+    render_template = "froide_election/plugins/region_search.html"
+
+    def render(self, context, instance, placeholder):
+        context = super().render(context, instance, placeholder)
+        context["search_url"] = reverse("election:region-search")
         return context
