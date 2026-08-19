@@ -1,0 +1,112 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-08-19 14:37+0100\n"
+"PO-Revision-Date: 2026-08-19 14:41+0100\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.9\n"
+
+#: apps.py
+msgid "Election App"
+msgstr "Wahl-App"
+
+#: cms_apps.py
+msgid "Election CMS App"
+msgstr "Wahl CMS App"
+
+#: cms_plugins.py templates/froide_election/base.html
+msgid "Elections"
+msgstr "Wahlen"
+
+#: cms_plugins.py
+msgid "Upcoming elections"
+msgstr "Anstehende Wahlen"
+
+#: cms_plugins.py
+msgid "Election region search"
+msgstr "Wahlen Ortsuche"
+
+#: models.py
+msgid "election"
+msgstr "Wahl"
+
+#: models.py
+msgid "elections"
+msgstr "Wahlen"
+
+#: templates/froide_election/base.html
+msgid "Home Page"
+msgstr "Startseite"
+
+#: templates/froide_election/includes/_region_searchform.html
+msgid "Search name or postcode"
+msgstr "Suche nach Namen oder PLZ"
+
+#: templates/froide_election/includes/_region_searchform.html
+msgid "Search"
+msgstr "Suchen"
+
+#: templates/froide_election/includes/_region_select.html
+#, python-format
+msgid "Search for your %(region_kinds)s"
+msgstr "Suche nach %(region_kinds)s"
+
+#: templates/froide_election/includes/_region_select.html
+#, python-format
+msgid "Select your %(region_kinds)s"
+msgstr "Wähle %(region_kinds)s aus"
+
+#: templates/froide_election/plugins/upcoming_elections.html
+msgid "No upcoming elections."
+msgstr "Keine anstehenden Wahlen."
+
+#: templates/froide_election/region.html
+#, python-format
+msgid "Upcoming elections in %(region)s"
+msgstr "Anstehende Wahlen in %(region)s"
+
+#: templates/froide_election/region.html
+#, python-format
+msgid "Postal vote material for %(election)s"
+msgstr "Briefwahl-Material für %(election)s"
+
+#: templates/froide_election/region.html
+#, python-format
+msgid "To whom it may concern, I am writing to request postal vote material for the upcoming election %(election)s. I am a resident of %(region.name)s and would like to exercise my right to vote by mail. Name: [Your Name] Address: [Your Address] Date of Birth: [Your Date of Birth] Thank you for your assistance. Kind regards,"
+msgstr ""
+
+#: templates/froide_election/region.html
+msgid "Send email"
+msgstr "Sende E-Mail"
+
+#: templates/froide_election/region.html
+msgid "No public body found for this region."
+msgstr "Keine Behörde für diese Region gefunden."
+
+#: urls.py
+msgctxt "url part"
+msgid "election/<slug:election_slug>/"
+msgstr "wahl/<slug:election_slug>/"
+
+#: urls.py
+msgctxt "url part"
+msgid "region-search/"
+msgstr "ort-suche/"
+
+#: urls.py
+msgctxt "url part"
+msgid "in/<int:region_identifier>-<slug:region_slug>/"
+msgstr "in/<int:region_identifier>-<slug:region_slug>/"
