@@ -9,8 +9,7 @@
 {% endblock meta %}
 {% block app_body %}
     <div class="container my-3">
-        <h1>{{ election.name }}</h1>
-        <p>{{ election.short_description }}</p>
-        {% include "froide_election/includes/_region_select.html" with region_kinds=region_kinds query=query %}
+        {% include "froide_election/includes/_region_searchform.html" with query=query %}
+        {% include "froide_election/includes/_regions.html" %}
     </div>
-{% endblock app_body %}
+{% endblock %}

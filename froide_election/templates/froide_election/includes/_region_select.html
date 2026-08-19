@@ -1,0 +1,8 @@
+{% load i18n %}
+{% if paginator.num_pages > 1 %}
+    <h3>{% blocktranslate with region_kinds=region_kinds %}Search for your {{ region_kinds }}{% endblocktranslate %}</h3>
+    {% include "froide_election/includes/_region_searchform.html" with search_url=region_search_url %}
+{% else %}
+    <h3>{% blocktranslate with region_kinds=region_kinds %}Select your {{ region_kinds }}{% endblocktranslate %}</h3>
+{% endif %}
+{% include "froide_election/includes/_regions.html" %}

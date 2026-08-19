@@ -1,6 +1,6 @@
 {% load i18n %}
 {% load election_tags %}
-<div id="election-{{ election.id }}-regions">
+<div id="region-list">
     <div class="table-responsive">
         <table class="table">
             {% for region in regions %}
@@ -9,17 +9,16 @@
                         <a href="{{ region|region_url }}">{{ region.name }}</a>
                         {% if postcodes %}
                             <small>
-                                {% for postcode in region.related.all %}<span class="badge text-bg-light">{{ postcode.name }}</span>{% endfor %}
+                                {% for postcode in region.related.all %}<span class="badge text-bg-light me-1">{{ postcode.name }}</span>{% endfor %}
                             </small>
                         {% endif %}
+                        {{ region|region_ancestors }}
                     </td>
                 </tr>
             {% endfor %}
         </table>
     </div>
     {% if paginator.num_pages > 1 %}
-        <div hx-boost="true" hx-target="#election-{{ election.id }}-regions">
-            {% include "pagination/pagination.html" with page_obj=page_obj %}
-        </div>
+        <div hx-boost="true" hx-target="#region-list">{% include "pagination/pagination.html" with page_obj=page_obj %}</div>
     {% endif %}
 </div>

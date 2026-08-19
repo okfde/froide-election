@@ -1,0 +1,21 @@
+{% load i18n %}
+<form method="get"
+      action="{% if search_url %}{{ search_url }}{% else %}.{% endif %}"
+      hx-boost="true"
+      hx-replace-url="false"
+      hx-target="#region-list"
+      hx-swap="show:none"
+      hx-trigger="input changed delay:350ms, keyup[key=='Enter'], load">
+    <div class="input-group">
+        {% blocktranslate asvar search_region %}Search name or postcode{% endblocktranslate %}
+        <input type="text"
+               name="q"
+               value="{{ query }}"
+               autocomplete="off"
+               class="form-control"
+               placeholder="{{ search_region }}"
+               aria-label="{{ search_region }}"
+               aria-describedby="region-search">
+        <button class="btn btn-outline-secondary" type="button" id="region-search">{% translate "Search" %}</button>
+    </div>
+</form>

@@ -14,7 +14,7 @@
                 </a>
             </li>
             <li class="breadcrumb-item">
-                {% page_url "election" as election_url %}
+                {% page_url request.current_page as election_url %}
                 <a href="{{ election_url }}">{% translate "Elections" %}</a>
             </li>
             {% if election %}

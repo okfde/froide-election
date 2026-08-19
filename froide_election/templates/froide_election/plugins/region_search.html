@@ -1,0 +1,8 @@
+{% load i18n %}
+{% load sekizai_tags %}
+{% load static %}
+{% include "froide_election/includes/_region_searchform.html" with query=query %}
+{% include "froide_election/includes/_regions.html" %}
+{% addtoblock "js" %}
+<script type="text/javascript" src="{% static 'election/js/htmx.min.js' %}"></script>
+{% endaddtoblock %}
