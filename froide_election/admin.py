@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Election
+from .models import Election, RegionSelection
 
 
 @admin.register(Election)
@@ -15,3 +15,15 @@ class ElectionAdmin(admin.ModelAdmin):
     raw_id_fields = ("region",)
 
     search_fields = ("name",)
+
+
+@admin.register(RegionSelection)
+class RegionSelectionAdmin(admin.ModelAdmin):
+    list_display = (
+        "region",
+        "sub_region_kind",
+    )
+    raw_id_fields = ("region",)
+    list_filter = ("sub_region_kind",)
+
+    search_fields = ("region__name",)
